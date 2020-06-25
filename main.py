@@ -4,7 +4,6 @@ import random
 colorList = ['red', 'orange', 'yellow', 'green',
                 'blue', 'indigo', 'violet',]
 
-
 def makeAnswerList(list, len):
     '''Returns a list of random strings from a list. Uses random.choices.
     len is the length of the new list.
@@ -68,9 +67,6 @@ def startGuessing(emptyList, len):
     for x in range(len):
         guess = input('Enter your guess here: ')
         emptyList.append(guess.lower())
-
-# Checks for correct colors in the wrong place.
-
 
 # Checks for correct colors in the correct place.
 for colorIndex in range(numberOfColors):
