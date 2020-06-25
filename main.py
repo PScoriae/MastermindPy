@@ -4,44 +4,70 @@ import random
 colorList = ['red', 'orange', 'yellow', 'green',
                 'blue', 'indigo', 'violet',]
 
-numberOfColors = 4
 
-# Number of correct colors in the correct place.
-corColCorPl = 0
+def makeAnswerList(list, len):
+    '''Returns a list of random strings from a list. Uses random.choices.
+    len is the length of the new list.
+    '''
+    return random.choices(list, k=len)
 
-# Number of correct colors in the wrong place.
-corColWrongPl = 0
+def makeComparisonList(list):
+    '''Makes a copy of a list for future comparison.'''
+    return list[:]
 
-# Generates a list of 4 random colors from colorList with repeats.
-answer = random.choices(colorList, k=numberOfColors)
-comparisonList = answer[:]
-print(answer)
-# Empty list to hold the values of user's guesses.
-guesses = []
+def isMatch(guesses, answer):
+    '''Checks if guesses list is equal to answer list.'''
+    return guesses == answer
+
+def getList(list):
+    '''Prints list in an easy to read format.'''
+    for string in list:
+        if list[-1] == string:
+            print(string)
+        else:
+            print(string + ', ', end='')
+
 
 # Welcome message and premise.
 print('''
 Welcome to MastermindPy! The objective of the game is to guess 4 colors
-in the correct order that I have randomly chosen from a list.
-Colors can be repeated.''')
+in the correct order that I have randomly chosen from a list of colors.
+Colors can be repeated. Each color that you guess must be entered once.
+You can type 'help' at any time for a list of commands.
+''')
 
 print('Here is the list: ')
 
-for color in colorList:
-    print(color + ', ', end='')
+getList(colorList)
 
-print("Let's begin!")
+print("\n\nLet's begin!")
+
+while True:
+    # Number of colors to be chosen for answer list.
+    numberOfColors = 4
+
+    # Number of correct colors in the correct place.
+    corColCorPl = 0
+
+    # Number of correct colors in the wrong place.
+    corColWrongPl = 0
+
+    # Empty list to hold the values of user's guesses.
+    guesses = []
+
+    answer = makeAnswerList(colorList)
+    print(answer)
+    comparisonList = makeComparisonList(answer)
+    startGuessing(guesses, numberOfColors)
 
 
-# Checks if guesses are equal to answer.
-def isMatch(guesses, answer):
-    return guesses == answer
-
-
-# Appends each input of user into guesses list.
-for x in range(numberOfColors):
-    guess = input('Enter your guess here: ')
-    guesses.append(guess.lower())
+def startGuessing(emptyList, len):
+    '''Takes the input of the user and appends them to the emptyList
+    for len amount of times.
+    '''
+    for x in range(len):
+        guess = input('Enter your guess here: ')
+        emptyList.append(guess.lower())
 
 # Checks for correct colors in the wrong place.
 
