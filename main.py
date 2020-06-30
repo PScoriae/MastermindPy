@@ -2,7 +2,7 @@ import random
 
 # List of colors that the computer can choose from.
 colorList = ['red', 'orange', 'yellow', 'green',
-                'blue', 'indigo', 'violet',]
+            'blue', 'indigo', 'violet',]
 numberOfColors = 4
 
 def makeAnswerList(list, len):
@@ -20,7 +20,7 @@ def isMatch(guesses, answer):
 def getList(list):
     '''Prints list in an easy to read format.'''
     for string in list:
-        if list[-1] == string:
+        if list[len(list)-1] == string:
             print(string)
         else:
             print(string + ', ', end='')
@@ -38,13 +38,13 @@ def startGuessing(emptyList, len):
 def congrats(guessCount):
     print('Congratulations! You matched all the colors! You won the game!')
     if guessCount == 1:
-        print('It took you 1 guess to figure out the colours!')
+        print('It took you 1 guess to figure out the colours!\n')
     else:
-        print('It took you ' + guessCount + ' guesses to figure out the colours!')
+        print('It took you ' + guessCount + ' guesses to figure out the colours!\n')
 
 def wantRepeat():
     while True:
-        x = input('Would you like to play again?(Y/n)\n') or 'y'
+        x = input('\nWould you like to play again?(Y/n)\n') or 'y'
         if x.lower() in ['yes', 'y']:
             return True
         elif x.lower() in ['no', 'n']:
@@ -62,7 +62,7 @@ def main():
         guesses = []
         guessCount += 1
         guesses = []
-        print(answer)
+        # print(answer)
         corColCorPl = 0
         corColWrongPl = 0
         startGuessing(guesses, numberOfColors)
@@ -89,7 +89,7 @@ def main():
 
         print('\nHere are your results for this attempt.')
         print('Correct colors in the correct place: ' + str(corColCorPl))
-        print('Correct colors in the wrong place: ' + str(corColWrongPl))
+        print('Correct colors in the wrong place: ' + str(corColWrongPl) + '\n')
         if isMatch(guesses, answer):
             congrats(guessCount)
             print('This is the answer list: ')
@@ -101,7 +101,7 @@ def main():
     if wantRepeat():
         main()
     else:
-        print('Thanks for playing! Goodbye.')
+        print('\nThanks for playing! Goodbye.')
 
 print('''
 Welcome to MastermindPy! The objective of the game is to guess 4 colors
