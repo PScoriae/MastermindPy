@@ -32,16 +32,17 @@ def startGuessing(emptyList, len):
     '''
     for x in range(len):
         guess = input('Enter your guess here: ')
+        while guess.lower() not in colorList:
+            print('Error, that is not in my color list.')
+            guess = input('Enter your guess here: ')
         emptyList.append(guess.lower())
-
-    return None
 
 def congrats(guessCount):
     print('Congratulations! You matched all the colors! You won the game!')
     if guessCount == 1:
         print('It took you 1 guess to figure out the colours!\n')
     else:
-        print('It took you ' + guessCount + ' guesses to figure out the colours!\n')
+        print('It took you ' + str(guessCount) + ' guesses to figure out the colours!\n')
 
 def wantRepeat():
     while True:
@@ -58,8 +59,8 @@ def main():
     print('Here is the list of colors I will choose from: ')
     getList(colorList)
     print("\n\nLet's begin!")
+    guessCount = 0
     while True:
-        guessCount = 0
         guesses = []
         guessCount += 1
         guesses = []
@@ -69,10 +70,8 @@ def main():
         startGuessing(guesses, numberOfColors)
         guessesCopy = copyList(guesses)
         comparisonList = copyList(answer)
-        print(f'{guesses} guesses list')
-        print(f'{guessesCopy} guess copy list')
-        print(f'{answer} answer list')
-        print(f'{comparisonList} comparison list')
+        # print(f'{guesses} guesses list')
+        # print(f'{answer} answer list')
 
         # Checks for correct colors in the correct place.
         for colorIndex in range(numberOfColors):
@@ -80,13 +79,20 @@ def main():
                 corColCorPl += 1
                 comparisonList.remove(guesses[colorIndex])
                 guessesCopy.remove(guesses[colorIndex])
-        print(f'{comparisonList} comparison list')
-        print(f'{guessesCopy} guesses list')
+        comparisonList2 = copyList(comparisonList)
+        # print('after first check')
+        # print(f'{comparisonList} comparisonList')
+        # print(f'{comparisonList2} comparisonList2')
+        # print(f'{guessesCopy} guessesCopy')
 
         # Checks for correct colors in the wrong place.
         for colorIndex in range(len(guessesCopy)):
-            if guessesCopy[colorIndex] in comparisonList:
-                    corColWrongPl += 1
+            if guessesCopy[colorIndex] in comparisonList2:
+                comparisonList2.remove(guessesCopy[colorIndex])
+        # print('after second check')
+        # print(f'{comparisonList2} comparisonList2')
+        corColWrongPl = len(comparisonList) - len(comparisonList2)
+
 
         print('\nHere are your results for this attempt.')
         print('Correct colors in the correct place: ' + str(corColCorPl))
