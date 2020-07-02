@@ -41,7 +41,7 @@ def congrats(guessCount):
     else:
         print('It took you ' + str(guessCount) + ' guesses to figure out the colours!\n')
 
-def replay():
+def playAgain():
     '''Asks if the user would like to replay.'''
     while True:
         x = input('\nWould you like to play again?(Y/n)\n') or 'y'
@@ -61,7 +61,6 @@ def main():
         getList(colorList)
         guessCount += 1
         guesses = []
-        # print(answer)
         corColCorPl = 0
         corColWrongPl = 0
         guessCol(guesses, numberOfColors)
@@ -69,9 +68,6 @@ def main():
         getList(guesses)
         guessesCopy = copyList(guesses)
         comparisonList = copyList(answer)
-        # print(f'{guesses} guesses list')
-        # print(f'{answer} answer list')
-
         # Checks for correct colors in the correct place.
         for colorIndex in range(numberOfColors):
             if guesses[colorIndex] == answer[colorIndex]:
@@ -79,17 +75,12 @@ def main():
                 comparisonList.remove(guesses[colorIndex])
                 guessesCopy.remove(guesses[colorIndex])
         comparisonList2 = copyList(comparisonList)
-        # print('after first check')
-        # print(f'{comparisonList} comparisonList')
-        # print(f'{comparisonList2} comparisonList2')
-        # print(f'{guessesCopy} guessesCopy')
 
         # Checks for correct colors in the wrong place.
         for colorIndex in range(len(guessesCopy)):
             if guessesCopy[colorIndex] in comparisonList2:
                 comparisonList2.remove(guessesCopy[colorIndex])
-        # print('after second check')
-        # print(f'{comparisonList2} comparisonList2')
+
         corColWrongPl = len(comparisonList) - len(comparisonList2)
 
         print('Here are your results for this attempt.')
@@ -103,7 +94,7 @@ def main():
         else:
             print('Try again.')
 
-    if replay():
+    if playAgain():
         main()
     else:
         print('\nThanks for playing! Goodbye.')
