@@ -1,5 +1,6 @@
 import random
 
+# help function incomplete
 # List of colors that the computer can choose from.
 colorList = ['red', 'orange', 'yellow', 'green',
             'blue', 'indigo', 'violet',]
@@ -103,8 +104,7 @@ def main():
     else:
         print('\nThanks for playing! Goodbye.')
 
-print('''
-Welcome to MastermindPy! The objective of the game is to guess 4 colors
+print('''Welcome to MastermindPy! The objective of the game is to guess 4 colors
 in the correct order that I have randomly chosen from a list of colors.
 Colors can be repeated. Each color that you guess must be entered once.
 You can type 'help' at any time for a list of commands.
