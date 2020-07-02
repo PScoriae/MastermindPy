@@ -28,6 +28,8 @@ def guessCol(emptyList, len):
     '''
     for x in range(len):
         guess = input('Enter your guess here: ')
+        if guess == 'exit':
+            return exit
         while guess.lower() not in colorList:
             print('Error, that is not in my color list.')
             guess = input('Enter your guess here: ')
@@ -40,6 +42,10 @@ def congrats(guessCount):
         print('It took you 1 guess to figure out the colours!\n')
     else:
         print('It took you ' + str(guessCount) + ' guesses to figure out the colours!\n')
+
+def goodbye():
+    '''Prints a goodbye message for the user.'''
+    print('Thanks for playing! Goodbye.')
 
 def playAgain():
     '''Asks if the user would like to replay.'''
@@ -63,7 +69,9 @@ def main():
         guesses = []
         corColCorPl = 0
         corColWrongPl = 0
-        guessCol(guesses, numberOfColors)
+        if guessCol(guesses, numberOfColors) == exit:
+            goodbye()
+            break
         print('\nThis is what you guessed: ')
         getList(guesses)
         guessesCopy = copyList(guesses)
@@ -90,19 +98,18 @@ def main():
             congrats(guessCount)
             print('This is the answer list: ')
             getList(answer)
-            break
+            if playAgain():
+                main()
+            else:
+                goodbye()
+                break
         else:
             print('Try again.')
-
-    if playAgain():
-        main()
-    else:
-        print('\nThanks for playing! Goodbye.')
 
 print('''Welcome to MastermindPy! The objective of the game is to guess 4 colors
 in the correct order that I have randomly chosen from a list of colors.
 Colors can be repeated. Each color that you guess must be entered once.
-You can type 'help' at any time for a list of commands.
+You can type 'exit' at any time to leave the game.
 ''')
 
 main()
