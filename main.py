@@ -1,12 +1,11 @@
 import random
 
 # help function incomplete
-# List of colors that the computer can choose from.
 colorList = ['red', 'orange', 'yellow', 'green',
             'blue', 'indigo', 'violet',]
 numberOfColors = 4
 
-def makeAnswerList(list, len):
+def randList(list, len):
     '''Returns a list of random strings from a list.'''
     return random.choices(list, k=len)
 
@@ -20,13 +19,10 @@ def isMatch(guesses, answer):
 
 def getList(list):
     '''Prints list in an easy to read format.'''
-    for string in list:
-        if list[len(list)-1] == string:
-            print(string)
-        else:
-            print(string + ', ', end='')
+    print(*list, sep=', ')
+    print()
 
-def startGuessing(emptyList, len):
+def guessCol(emptyList, len):
     '''Takes the input of the user and appends them to the emptyList
     for len amount of times.
     '''
@@ -38,13 +34,15 @@ def startGuessing(emptyList, len):
         emptyList.append(guess.lower())
 
 def congrats(guessCount):
+    '''Congratulates user.'''
     print('Congratulations! You matched all the colors! You won the game!')
     if guessCount == 1:
         print('It took you 1 guess to figure out the colours!\n')
     else:
         print('It took you ' + str(guessCount) + ' guesses to figure out the colours!\n')
 
-def wantRepeat():
+def replay():
+    '''Asks if the user would like to replay.'''
     while True:
         x = input('\nWould you like to play again?(Y/n)\n') or 'y'
         if x.lower() in ['yes', 'y']:
@@ -55,19 +53,20 @@ def wantRepeat():
             print("I don't understand. Please type 'y' or 'n'")
 
 def main():
-    answer = makeAnswerList(colorList, numberOfColors)
-    print('Here is the list of colors I will choose from: ')
-    getList(colorList)
-    print("\n\nLet's begin!")
+    answer = randList(colorList, numberOfColors)
+    print("\nLet's begin!")
     guessCount = 0
     while True:
-        guesses = []
+        print('\nHere is the list of colors I will choose from: ')
+        getList(colorList)
         guessCount += 1
         guesses = []
         # print(answer)
         corColCorPl = 0
         corColWrongPl = 0
-        startGuessing(guesses, numberOfColors)
+        guessCol(guesses, numberOfColors)
+        print('\nThis is what you guessed: ')
+        getList(guesses)
         guessesCopy = copyList(guesses)
         comparisonList = copyList(answer)
         # print(f'{guesses} guesses list')
@@ -93,10 +92,9 @@ def main():
         # print(f'{comparisonList2} comparisonList2')
         corColWrongPl = len(comparisonList) - len(comparisonList2)
 
-
-        print('\nHere are your results for this attempt.')
+        print('Here are your results for this attempt.')
         print('Correct colors in the correct place: ' + str(corColCorPl))
-        print('Correct colors in the wrong place: ' + str(corColWrongPl) + '\n')
+        print('Correct colors in the wrong place: ' + str(corColWrongPl))
         if isMatch(guesses, answer):
             congrats(guessCount)
             print('This is the answer list: ')
@@ -105,7 +103,7 @@ def main():
         else:
             print('Try again.')
 
-    if wantRepeat():
+    if replay():
         main()
     else:
         print('\nThanks for playing! Goodbye.')
