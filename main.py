@@ -1,21 +1,9 @@
 import random
 
-# help function incomplete
+
 colorList = ['red', 'orange', 'yellow', 'green',
             'blue', 'indigo', 'violet',]
 numberOfColors = 4
-
-def randList(list, len):
-    '''Returns a list of random strings from a list.'''
-    return random.choices(list, k=len)
-
-def copyList(list):
-    '''Makes a copy of a list for comparison.'''
-    return list[:]
-
-def isMatch(guesses, answer):
-    '''Checks if two lists are equal.'''
-    return guesses == answer
 
 def getList(list):
     '''Prints list in an easy to read format.'''
@@ -27,7 +15,7 @@ def guessCol(emptyList, len):
     for len amount of times.
     '''
     for x in range(len):
-        guess = input('Enter your guess here: ')
+        guess = input('Enter your guess here: ').strip()
         if guess == 'exit':
             return exit
         while guess.lower() not in colorList:
@@ -50,51 +38,47 @@ def goodbye():
 def playAgain():
     '''Asks if the user would like to replay.'''
     while True:
-        x = input('\nWould you like to play again?(Y/n)\n') or 'y'
+        x = input('\nWould you like to play again?(Y/n)\n').strip() or 'y'
         if x.lower() in ['yes', 'y']:
             return True
-        elif x.lower() in ['no', 'n']:
+        elif x.lower() in ['no', 'n', 'exit']:
             return False
         else:
-            print("I don't understand. Please type 'y' or 'n'")
+            print("I don't understand. Please enter 'y' or 'n'")
 
 def main():
-    answer = randList(colorList, numberOfColors)
+    answer = random.choices(colorList, k=numberOfColors)
     print("\nLet's begin!")
     guessCount = 0
     while True:
         print('\nHere is the list of colors I will choose from: ')
         getList(colorList)
-        guessCount += 1
-        guesses = []
-        corColCorPl = 0
-        corColWrongPl = 0
+        guesses, corColCorPl, corColWrongPl = [], 0, 0
         if guessCol(guesses, numberOfColors) == exit:
             goodbye()
             break
+        guessCount += 1
         print('\nThis is what you guessed: ')
         getList(guesses)
-        guessesCopy = copyList(guesses)
-        comparisonList = copyList(answer)
+        guessesCopy, comparisonList = guesses[:], answer[:]
         # Checks for correct colors in the correct place.
         for colorIndex in range(numberOfColors):
             if guesses[colorIndex] == answer[colorIndex]:
                 corColCorPl += 1
                 comparisonList.remove(guesses[colorIndex])
                 guessesCopy.remove(guesses[colorIndex])
-        comparisonList2 = copyList(comparisonList)
+        comparisonList2 = comparisonList[:]
 
         # Checks for correct colors in the wrong place.
         for colorIndex in range(len(guessesCopy)):
             if guessesCopy[colorIndex] in comparisonList2:
                 comparisonList2.remove(guessesCopy[colorIndex])
-
         corColWrongPl = len(comparisonList) - len(comparisonList2)
 
         print('Here are your results for this attempt.')
         print('Correct colors in the correct place: ' + str(corColCorPl))
         print('Correct colors in the wrong place: ' + str(corColWrongPl))
-        if isMatch(guesses, answer):
+        if guesses == answer:
             congrats(guessCount)
             print('This is the answer list: ')
             getList(answer)
