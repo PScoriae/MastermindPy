@@ -49,7 +49,7 @@ def goodbye():
 def main():
     '''Main logic for the game.'''
     answer = random.choices(colorList, k=numberOfColors)
-    print("\nLet's begin!")
+    print("Let's begin!")
     guessCount = 0
     while True:
         print('\nHere is the list of colors I will choose from: ')
