@@ -62,6 +62,7 @@ def main():
         print('\nThis is what you guessed: ')
         getList(guesses)
         guessesCopy, comparisonList = guesses[:], answer[:]
+
         # Checks for correct colors in the correct place.
         for colorIndex in range(numberOfColors):
             if guesses[colorIndex] == answer[colorIndex]:
