@@ -21,6 +21,8 @@ def guessCol(emptyList, len):
         while guess.lower() not in colorList:
             print('Error, that is not in my color list.')
             guess = input('Enter your guess here: ')
+            if guess.lower() == 'exit':
+                return exit
         emptyList.append(guess.lower())
 
 def playAgain():
@@ -85,7 +87,7 @@ def main():
             print('This is the answer list: ')
             getList(answer)
             if playAgain():
-                main()
+                return main()
             else:
                 goodbye()
                 break
