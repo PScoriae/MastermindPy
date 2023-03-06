@@ -32,6 +32,10 @@ or copy the code in [`main.py`](https://github.com/PScoriae/MastermindPy/blob/ma
 
 # Running the Program
 
-Simply open a terminal in the project directory and run the following command:
+First, open a terminal in the project's root directory. Then, `cd` into the `src` folder like so:
+
+    cd src
+
+Finally, run the following command:
 
     python3 main.py
