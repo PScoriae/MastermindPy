@@ -30,7 +30,7 @@ Simply `git clone` this repository,
 
     git clone https://github.com/PScoriae/MastermindPy
 
-or copy the code in [`main.py`](https://github.com/PScoriae/MastermindPy/blob/master/main.py) into a `.py` file onto your system.
+or copy the code in [`main.py`](https://github.com/PScoriae/MastermindPy/blob/main/main.py) into a `.py` file onto your system.
 
 # Running the Program
 
