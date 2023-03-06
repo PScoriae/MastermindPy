@@ -1,10 +1,12 @@
+<div align='center'>
+
 # MastermindPy
 
-<div align='center'>
 <p>
   <a href="https://linkedin.com/in/pierreccesario">
     <img src="https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555">
   </a>
+  
   <a href="https://github.com/PScoriae/MastermindPy/blob/main/LICENSE.md">
     <img src="https://img.shields.io/badge/license-WTFPL-brightgreen?style=for-the-badge">
   </a>
